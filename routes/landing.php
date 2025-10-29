@@ -28,6 +28,9 @@ Route::name('landing.')->group(function () {
     Route::get('/pages/instructors', [App\Http\Controllers\Landing\InstructorController::class, 'index'])->name('instructors.index');
     Route::get('/pages/instructor/{slug}', [App\Http\Controllers\Landing\InstructorController::class, 'show'])->name('instructors.show');
 
+    // Podcasts routes
+    Route::get('/podcasts', [App\Http\Controllers\Landing\PodcastController::class, 'index'])->name('podcasts.index');
+
     Route::get('/pages/{page}', [App\Http\Controllers\Landing\PageController::class, 'show'])->name('pages.show');
 
 

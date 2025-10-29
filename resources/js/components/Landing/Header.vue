@@ -239,6 +239,10 @@ const menu = [
         href: route("landing.pages.show", { page: "categories" }),
     },
     {
+        title: t("البودكاست"),
+        href: route("landing.podcasts.index"),
+    },
+    {
         title: t("تواصل"),
         href: `${route("landing.home")}#contact`,
     },

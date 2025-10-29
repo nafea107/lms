@@ -37,6 +37,10 @@ export default function useAdminMenu() {
                 link: route("admin.pages.index"),
             },
             {
+                label: t("البودكاست"),
+                link: route("admin.podcasts.index"),
+            },
+            {
                 label: t("الاشتراكات"),
                 link: route("admin.enroll-course.index"),
             },

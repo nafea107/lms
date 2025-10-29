@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * 
- *
  * @property int $id
- * @property array $answer
+ * @property array<array-key, mixed> $answer
  * @property int $question_id
  * @property int $is_true
  * @property-read \App\Models\Question $question

@@ -60,4 +60,8 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     //settings
     Route::get('/enroll-course', [App\Http\Controllers\Admin\EnrollCourseController::class, 'index'])->name('enroll-course.index');
     Route::post('/enroll-course', [App\Http\Controllers\Admin\EnrollCourseController::class, 'store'])->name('enroll-course.store');
+
+    // podcasts
+    Route::get('/podcasts/data', [App\Http\Controllers\Admin\PodcastController::class, 'data'])->name('podcasts.data');
+    Route::resource('/podcasts', App\Http\Controllers\Admin\PodcastController::class);
 });

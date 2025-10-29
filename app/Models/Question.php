@@ -8,10 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * 
- *
  * @property int $id
- * @property array $question
+ * @property array<array-key, mixed> $question
  * @property int $quiz_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

@@ -9,8 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $email

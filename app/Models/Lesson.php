@@ -8,10 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * 
- *
  * @property int $id
- * @property array $name
+ * @property array<array-key, mixed> $name
  * @property string|null $img
  * @property string|null $file
  * @property string|null $yt_url

@@ -10,29 +10,37 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Translatable\HasTranslations;
 
 /**
- *
- *
  * @property int $id
- * @property array $name
+ * @property array<array-key, mixed> $name
+ * @property string $image
+ * @property array<array-key, mixed> $description
  * @property string $price
  * @property int $category_id
  * @property int $level_id
  * @property int $is_featured
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $subject_id
+ * @property int|null $instructor_id
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Chapter> $chapters
  * @property-read int|null $chapters_count
+ * @property-read \App\Models\Instructor|null $instructor
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lesson> $lessons
  * @property-read int|null $lessons_count
  * @property-read \App\Models\Level $level
+ * @property-read \App\Models\Subject|null $subject
  * @property-read mixed $translations
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Course isFav()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereInstructorId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereIsFeatured($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
@@ -41,12 +49,8 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereLocales(string $column, array $locales)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereSubjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereUpdatedAt($value)
- * @property string $image
- * @property array $description
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Course whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Course isFav()
  * @mixin \Eloquent
  */
 class Course extends Model
