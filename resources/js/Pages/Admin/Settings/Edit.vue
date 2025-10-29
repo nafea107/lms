@@ -131,6 +131,120 @@
                         class="mt-2 font-rabar-022"
                     />
                 </div>
+
+                <div>
+                    <InputLabel
+                        :value="$t('YouTube')"
+                        class="font-rabar-021"
+                    />
+
+                    <Input
+                        v-model="form.youtube"
+                        :placeholder="$t('YouTube')"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        type="text"
+                    />
+
+                    <InputError
+                        :message="form.errors['youtube']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
+
+                <div>
+                    <InputLabel
+                        :value="$t('Telegram')"
+                        class="font-rabar-021"
+                    />
+
+                    <Input
+                        v-model="form.telegram"
+                        :placeholder="$t('Telegram')"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        type="text"
+                    />
+
+                    <InputError
+                        :message="form.errors['telegram']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
+
+                <div>
+                    <InputLabel
+                        :value="$t('TikTok')"
+                        class="font-rabar-021"
+                    />
+
+                    <Input
+                        v-model="form.tiktok"
+                        :placeholder="$t('TikTok')"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        type="text"
+                    />
+
+                    <InputError
+                        :message="form.errors['tiktok']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
+
+                <div class="md:col-span-2">
+                    <InputLabel
+                        :value="$t('نص الفوتر العربي')"
+                        class="font-rabar-021"
+                    />
+
+                    <Textarea
+                        v-model="form.footer_text_ar"
+                        :placeholder="$t('نص الفوتر العربي')"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        rows="4"
+                    />
+
+                    <InputError
+                        :message="form.errors['footer_text_ar']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
+
+                <div class="md:col-span-2">
+                    <InputLabel
+                        :value="$t('نص الفوتر الكردي')"
+                        class="font-rabar-021"
+                    />
+
+                    <Textarea
+                        v-model="form.footer_text_ku"
+                        :placeholder="$t('نص الفوتر الكردي')"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        rows="4"
+                    />
+
+                    <InputError
+                        :message="form.errors['footer_text_ku']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
+
+                <div class="md:col-span-2">
+                    <InputLabel
+                        :value="$t('رابط الفيديو')"
+                        class="font-rabar-021"
+                    />
+
+                    <Input
+                        v-model="form.footer_video_url"
+                        :placeholder="$t('رابط الفيديو (YouTube embed URL)')"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        type="text"
+                    />
+
+                    <InputError
+                        :message="form.errors['footer_video_url']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
             </div>
 
             <div class="mt-4">
@@ -154,6 +268,7 @@ import InputError from "@/components/InputError.vue";
 import { Button } from "@/components/ui/button/index.js";
 import InputLabel from "@/components/InputLabel.vue";
 import { Input } from "@/components/ui/input/index.js";
+import { Textarea } from "@/components/ui/textarea/index.js";
 import Swal from "sweetalert2";
 import { useI18n } from "vue-i18n";
 

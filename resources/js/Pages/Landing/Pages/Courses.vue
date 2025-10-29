@@ -64,8 +64,6 @@ import { usePage, useRemember, Head } from "@inertiajs/vue3";
 import { onMounted, reactive, ref } from "vue";
 import Courses from "@/components/Landing/Courses.vue";
 import LandingLayout2 from "@/Layouts/LandingLayout2.vue";
-import Pagination from "@/components/Pagination.vue";
-import LevelsAndCategories from "@/components/Landing/LevelsAndCategories.vue";
 
 defineOptions({
     layout: LandingLayout2,

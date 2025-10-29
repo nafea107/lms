@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-amber-100 flex flex-col min-h-screen">
+    <div class="bg-white flex flex-col min-h-screen">
         <Header :style="1" />
         <div class="flex-grow flex-col flex">
-            <div class="h-full bg-amber-100 fixed w-full hidden">
+            <div class="h-full bg-white fixed w-full hidden">
                 <img
                     alt="vector"
                     class="absolute w-60 top-[1rem] left-0 hidden md:block"

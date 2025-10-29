@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Instructor;
 use App\Models\Page;
+use App\Models\Post;
 use App\Models\Setting;
 use App\Models\Subject;
 use App\Models\User;
@@ -26,8 +27,16 @@ class HomeController extends Controller
 
         // Get experience years from settings
         $experienceYears = Setting::where('key', 'experience_years')->first()?->value ?? 0;
+        
+        // Get published posts ordered by order field
+        $posts = Post::where('is_published', true)
+            ->orderBy('order', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
         return Inertia::render('Landing/Home', [
             'subjects' => $subjects,
+            'posts' => $posts,
             'page' => Page::where('slug', 'home')->first(),
             'footerPage' => Page::where('slug', 'footer')->first(),
             'stats' => [

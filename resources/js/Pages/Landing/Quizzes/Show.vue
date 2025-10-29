@@ -45,23 +45,21 @@
                 </Button>
             </div>
         </div>
-    </div>
 </template>
-
 
 <script setup>
 import {usePage, Head, Link} from "@inertiajs/vue3";
-import LandingLayout2 from "@/Layouts/LandingLayout2.vue";
-import LessonsList from "@/components/Landing/LessonsList.vue";
+import LandingLayout2 from '@/Layouts/LandingLayout2.vue'
+
+defineOptions({
+    layout: LandingLayout2
+})
 import {Icon} from "@iconify/vue";
 import {ref} from "vue";
 import {Button} from "@/components/ui/button/index.js";
 import Swal from "sweetalert2";
 import {useI18n} from "vue-i18n";
 
-defineOptions({
-    layout: LandingLayout2
-})
 const props = defineProps({
     quiz: Object
 })

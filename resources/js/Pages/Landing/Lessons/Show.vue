@@ -16,13 +16,12 @@
 
             </div>
         </div>
-    </div>
 </template>
 
 
 <script setup>
 import {usePage, Head, Link} from "@inertiajs/vue3";
-import LandingLayout2 from "@/Layouts/LandingLayout2.vue";
+import LandingLayout2 from '@/Layouts/LandingLayout2.vue'
 import LessonsList from "@/components/Landing/LessonsList.vue";
 import {Icon} from "@iconify/vue";
 import {onMounted, ref} from "vue";

@@ -1,10 +1,8 @@
 <template>
     <div>
         <Head :title="$t('الرئيسية')" />
-        <Hero :data="page.data" :stats="stats" />
-        <!-- <Courses :courses="courses" class="mt-8"/> -->
-        <Subjects :subjects="subjects" class="mt-8" />
-        <Sections class="mt-8" />
+        <Hero :data="page.data" :stats="stats" class="mt-5" />
+        <Posts :posts="posts" class="mt-8" />
         <Footer :data="page.data" :page="footerPage" class="mt-12" />
     </div>
 </template>
@@ -12,9 +10,7 @@
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import Hero from "@/components/Landing/Hero.vue";
-import Courses from "@/components/Landing/Courses.vue";
-import Subjects from "@/components/Landing/Subjects.vue";
-import Sections from "@/components/Landing/Sections.vue";
+import Posts from "@/components/Landing/Posts.vue";
 import Footer from "@/components/Landing/Footer.vue";
 
 defineOptions({
@@ -22,7 +18,7 @@ defineOptions({
 });
 const props = defineProps({
     page: Object,
-    subjects: Array,
+    posts: Array,
     stats: Object,
     footerPage: Object,
 });

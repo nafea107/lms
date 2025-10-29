@@ -33,6 +33,10 @@ export default function useAdminMenu() {
                 link: route("admin.levels.index"),
             },
             {
+                label: t("المقالات"),
+                link: route("admin.posts.index"),
+            },
+            {
                 label: t("الصفحات"),
                 link: route("admin.pages.index"),
             },

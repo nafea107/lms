@@ -64,4 +64,8 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     // podcasts
     Route::get('/podcasts/data', [App\Http\Controllers\Admin\PodcastController::class, 'data'])->name('podcasts.data');
     Route::resource('/podcasts', App\Http\Controllers\Admin\PodcastController::class);
+
+    // posts
+    Route::get('/posts/data', [App\Http\Controllers\Admin\PostController::class, 'data'])->name('posts.data');
+    Route::resource('/posts', App\Http\Controllers\Admin\PostController::class);
 });
