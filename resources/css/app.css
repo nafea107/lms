@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Rabar_004";
+    src: url("./fonts/Rabar_004.eot"); /* IE9 Compat Modes */
+    src: url("./fonts/Rabar_004.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("./fonts/Rabar_004.ttf") format("truetype"), /* Safari, Android, iOS */ url("./fonts/Rabar_004.woff") format("woff"); /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rabar_021";
+    src: url("./fonts/Rabar_021.eot"); /* IE9 Compat Modes */
+    src: url("./fonts/Rabar_021.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("./fonts/Rabar_021.ttf") format("truetype"), /* Safari, Android, iOS */ url("./fonts/Rabar_021.woff") format("woff"); /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rabar_022";
+    src: url("./fonts/Rabar_022.eot"); /* IE9 Compat Modes */
+    src: url("./fonts/Rabar_022.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("./fonts/Rabar_022.ttf") format("truetype"), /* Safari, Android, iOS */ url("./fonts/Rabar_022.woff") format("woff"); /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-rabar-004 {
+    font-family: "Rabar_004", sans-serif;
+}
+
+.font-rabar-021 {
+    font-family: "Rabar_021", sans-serif;
+}
+
+.font-rabar-022 {
+    font-family: "Rabar_022", sans-serif;
+}
+
+.inner-shadow {
+    box-shadow: inset 0 0 0.7rem rgba(0, 0, 0, 0.2);
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+    background: #064e3b !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm):hover {
+    background: rgb(6 78 59 / 0.9) !important;
+}
+
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}
+
