@@ -12,16 +12,16 @@
                 
                 <!-- Green Stripe (Bottom) with Content -->
                 <div class="bg-green-600 relative">
-                    <div class="max-w-7xl mx-auto px-4 py-2.5 flex justify-between items-center">
+                    <div class="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-2.5 flex justify-between items-center">
                         <!-- Left: Logo and Text -->
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-1 sm:gap-2">
                             <img
                                 v-if="logo"
                                 :src="`/storage/${logo}`"
                                 alt="Logo"
-                                class="h-8"
+                                class="h-6 sm:h-8"
                             />
-                            <span class="text-white text-lg font-bold">{{ settings.app_name || 'Future Leaders' }}</span>
+                            <span class="text-white text-sm sm:text-lg font-bold">{{ settings.app_name || 'Future Leaders' }}</span>
                         </div>
                         
                         <!-- Center: Sun Icon -->
@@ -59,14 +59,14 @@
                         </div>
                         
                         <!-- Right: Icons and Sign Up -->
-                        <div class="flex items-center gap-3">
-                            <button class="text-white hover:text-gray-200">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <button class="text-white hover:text-gray-200 hidden sm:block">
                                 <Icon icon="mdi:moon-waning-crescent" class="w-5 h-5" />
                             </button>
-                            <button class="text-white hover:text-gray-200">
+                            <button class="text-white hover:text-gray-200 hidden sm:block">
                                 <Icon icon="mdi:bell" class="w-5 h-5" />
                             </button>
-                            <button class="text-white hover:text-gray-200">
+                            <button class="text-white hover:text-gray-200 hidden sm:block">
                                 <Icon icon="mdi:web" class="w-5 h-5" />
                             </button>
                             <Link
@@ -74,14 +74,14 @@
                                 :href="route('login')"
                                 class="text-white hover:text-gray-200 flex items-center gap-1 font-semibold"
                             >
-                                <Icon icon="mdi:close-circle-outline" class="w-5 h-5" />
-                                <span class="text-sm">{{ $t("تسجيل الدخول") }}</span>
+                                <Icon icon="mdi:close-circle-outline" class="w-4 h-4 sm:w-5 sm:h-5" />
+                                <span class="text-xs sm:text-sm">{{ $t("تسجيل الدخول") }}</span>
                             </Link>
                             <DropdownMenu v-else>
                                 <DropdownMenuTrigger as-child>
                                     <button class="text-white hover:text-gray-200 flex items-center gap-1">
-                                        <Icon icon="mdi:account-circle" class="w-5 h-5" />
-                                        <span class="text-sm">{{ $page.props.auth.user.name }}</span>
+                                        <Icon icon="mdi:account-circle" class="w-4 h-4 sm:w-5 sm:h-5" />
+                                        <span class="text-xs sm:text-sm">{{ $page.props.auth.user.name }}</span>
                                     </button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
@@ -101,33 +101,69 @@
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
+                            
+                            <Sheet>
+                                <SheetTrigger as-child>
+                                    <Button
+                                        class="shrink-0 md:hidden bg-transparent text-white hover:text-gray-200 border-white"
+                                        size="icon"
+                                        variant="outline"
+                                    >
+                                        <Menu class="h-5 w-5" />
+                                        <span class="sr-only">Toggle navigation menu</span>
+                                    </Button>
+                                </SheetTrigger>
+                                <SheetContent side="left">
+                                    <nav class="grid place-content-center gap-6 text-lg font-medium">
+                                        <Link
+                                            :href="route('landing.home')"
+                                            class="flex items-center gap-2 text-lg font-semibold"
+                                        >
+                                            <img
+                                                v-if="logo"
+                                                :src="`/storage/${logo}`"
+                                                alt=""
+                                                class="w-24 h-10"
+                                            />
+                                        </Link>
+                                        <Link
+                                            v-for="item in menu"
+                                            :key="item.href"
+                                            :href="item.href"
+                                            class="hover:text-foreground text-center"
+                                            v-text="item.title"
+                                        >
+                                        </Link>
+                                    </nav>
+                                </SheetContent>
+                            </Sheet>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Navigation Bar -->
-            <nav class="bg-gray-800">
+            <nav class="bg-gray-800 hidden md:block">
                 <div class="max-w-7xl mx-auto px-4">
-                    <div class="flex justify-between items-center">
-                        <div class="flex gap-1">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 py-2 md:py-0">
+                        <div class="flex flex-wrap gap-1 justify-center md:justify-start">
                             <Link
                                 v-for="(item, i) in menu"
                                 :key="`menu-item-${i}`"
                                 :href="item.href"
-                                class="text-white px-4 py-3 hover:bg-gray-700 transition font-medium"
+                                class="text-white px-3 md:px-4 py-2 md:py-3 hover:bg-gray-700 transition font-medium text-sm md:text-base"
                                 v-text="item.title"
                             ></Link>
                         </div>
-                        <div class="relative">
+                        <div class="relative w-full md:w-auto">
                             <input
                                 type="text"
                                 placeholder="Search"
-                                class="bg-white rounded-full px-4 py-1.5 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                                class="bg-white rounded-full px-4 py-1.5 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 w-full md:w-auto"
                             />
                             <Icon
                                 icon="mdi:magnify"
-                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5"
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4 md:w-5 md:h-5"
                             />
                         </div>
                     </div>
@@ -240,6 +276,13 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu/index.js";
+import {
+    Sheet,
+    SheetContent,
+    SheetTrigger,
+} from "@/components/ui/sheet/index.js";
+import { Button } from "@/components/ui/button/index.js";
+import { Menu } from "lucide-vue-next";
 
 const { t } = useI18n();
 const page = usePage();

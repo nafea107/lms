@@ -109,37 +109,36 @@
         </div>
     </div>
 </template>
-    <script setup>
-        import { Head, usePage } from "@inertiajs/vue3";
-        import { Icon } from "@iconify/vue";
-        import { onMounted, onUnmounted, ref } from "vue";
-        import LandingLayout2 from "@/Layouts/LandingLayout2.vue";
+<script setup>
+import { Head, usePage } from "@inertiajs/vue3";
+import { Icon } from "@iconify/vue";
+import { onMounted, onUnmounted, ref } from "vue";
+import LandingLayout2 from "@/Layouts/LandingLayout2.vue";
 
-        defineOptions({
-            layout: LandingLayout2,
-        });
+defineOptions({
+    layout: LandingLayout2,
+});
 
-        const props = defineProps({
-            page: Object,
-            whatsapp: String,
-        });
+const props = defineProps({
+    page: Object,
+    whatsapp: String,
+});
 
-        const page = usePage();
-        const locale = page.props.locale;
+const page = usePage();
+const locale = page.props.locale;
 
-        const description = ref();
-        const goal = ref();
+const description = ref();
+const goal = ref();
 
-        function setGoalHeight() {
-            goal.value.style.height = `${description.value.offsetHeight}px`;
-        }
+function setGoalHeight() {
+    goal.value.style.height = `${description.value.offsetHeight}px`;
+}
 
-        // onMounted(() => {
-        //     setGoalHeight();
-        //     window.addEventListener("resize", setGoalHeight);
-        // });
-        // onUnmounted(() => {
-        //     window.removeEventListener("resize", setGoalHeight);
-        // });
-    </script>
-</template>
+// onMounted(() => {
+//     setGoalHeight();
+//     window.addEventListener("resize", setGoalHeight);
+// });
+// onUnmounted(() => {
+//     window.removeEventListener("resize", setGoalHeight);
+// });
+</script>

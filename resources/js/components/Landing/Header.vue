@@ -11,19 +11,19 @@
             <!-- Green Stripe (Bottom) with Content -->
             <div class="bg-green-600 relative">
                 <div
-                    class="max-w-7xl mx-auto px-4 py-2.5 flex justify-between items-center"
+                    class="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-2.5 flex justify-between items-center"
                 >
                     <!-- Left: Logo and Text -->
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1 sm:gap-2">
                         <Link :href="route('landing.home')">
                             <img
                                 v-if="logo"
                                 :src="`/storage/${logo}`"
                                 alt="Logo"
-                                class="h-8"
+                                class="h-6 sm:h-8"
                             />
                         </Link>
-                        <span class="text-white text-lg font-bold">{{
+                        <span class="text-white text-sm sm:text-lg font-bold">{{
                             appName
                         }}</span>
                     </div>
@@ -65,10 +65,10 @@
                     </div>
 
                     <!-- Right: Icons and Sign Up -->
-                    <div class="flex gap-3 items-center">
+                    <div class="flex gap-2 sm:gap-3 items-center">
                         <DropdownMenu v-if="$page.props.notifications !== null">
                             <DropdownMenuTrigger as-child>
-                                <button class="text-white hover:text-gray-200">
+                                <button class="text-white hover:text-gray-200 hidden sm:block">
                                     <Icon icon="mdi:bell" class="w-5 h-5" />
                                 </button>
                             </DropdownMenuTrigger>
@@ -88,7 +88,7 @@
                             </DropdownMenuContent>
                         </DropdownMenu>
 
-                        <button class="text-white hover:text-gray-200">
+                        <button class="text-white hover:text-gray-200 hidden sm:block">
                             <Icon icon="mdi:web" class="w-5 h-5" />
                         </button>
 
@@ -99,9 +99,9 @@
                         >
                             <Icon
                                 icon="mdi:close-circle-outline"
-                                class="w-5 h-5"
+                                class="w-4 h-4 sm:w-5 sm:h-5"
                             />
-                            <span class="text-sm">{{
+                            <span class="text-xs sm:text-sm">{{
                                 $t("تسجيل الدخول")
                             }}</span>
                         </Link>
@@ -112,9 +112,9 @@
                                 >
                                     <Icon
                                         icon="mdi:account-circle"
-                                        class="w-5 h-5"
+                                        class="w-4 h-4 sm:w-5 sm:h-5"
                                     />
-                                    <span class="text-sm">{{
+                                    <span class="text-xs sm:text-sm">{{
                                         $page.props.auth.user.name
                                     }}</span>
                                 </button>
@@ -189,27 +189,27 @@
         </div>
 
         <!-- Navigation Bar -->
-        <nav class="bg-gray-800">
+        <nav class="bg-gray-800 hidden md:block">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-1">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 py-2 md:py-0">
+                    <div class="flex flex-wrap gap-1 justify-center md:justify-start">
                         <Link
                             v-for="(item, i) in menu"
                             :key="`menu-item-${i}`"
                             :href="item.href"
-                            class="text-white px-4 py-3 hover:bg-gray-700 transition font-medium"
+                            class="text-white px-3 md:px-4 py-2 md:py-3 hover:bg-gray-700 transition font-medium text-sm md:text-base"
                             v-text="item.title"
                         ></Link>
                     </div>
-                    <div class="relative">
+                    <div class="relative w-full md:w-auto">
                         <input
                             type="text"
                             :placeholder="$t('بحث')"
-                            class="bg-white rounded-full px-4 py-1.5 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                            class="bg-white rounded-full px-4 py-1.5 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 w-full md:w-auto"
                         />
                         <Icon
                             icon="mdi:magnify"
-                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5"
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4 md:w-5 md:h-5"
                         />
                     </div>
                 </div>
