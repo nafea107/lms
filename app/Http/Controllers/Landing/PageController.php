@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Landing;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
 use App\Models\Category;
-use App\Models\Level;
 use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -53,7 +52,6 @@ class PageController extends Controller
         return Inertia::render('Landing/Pages/Courses', [
             'page' => $page,
             'footerPage' => $footerPage,
-            'levels' => Level::get(),
             'categories' => Category::get(),
         ]);
     }

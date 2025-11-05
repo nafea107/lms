@@ -43,9 +43,7 @@ class CourseController extends Controller
         $course = $course->with('chapters')->firstOrFail();
         return Inertia::render('Admin/Courses/Edit', [
             'course' => $course,
-            'levels' => Level::get(),
-            'categories' => Category::get(),
-            'subjects' => Subject::get(),
+            'categories' => Category::with('children')->get(),
             'instructors' => Instructor::where('is_active', true)->get(),
         ]);
     }
@@ -55,22 +53,23 @@ class CourseController extends Controller
         $data = $request->validate([
             'name.ar' => 'required_without:name.ku|string',
             'name.ku' => 'required_without:name.ar|nullable|string',
+            'name.en' => 'nullable|string',
             'description.ar' => 'required|string',
             'description.ku' => 'required|string',
-            'level_id' => 'required|exists:App\Models\Level,id',
+            'description.en' => 'nullable|string',
             'category_id' => 'required|exists:App\Models\Category,id',
             'chapters' => 'required|array|min:1',
             'chapters.*.name.ar' => 'required|string',
             'chapters.*.name.ku' => 'required|string',
+            'chapters.*.name.en' => 'nullable|string',
             'price' => 'required|numeric',
             'is_featured' => 'required|boolean',
             'image' => 'required',
-            'subject_id' => 'required|exists:App\Models\Subject,id',
             'instructor_id' => 'nullable|exists:App\Models\Instructor,id',
         ]);
         $data['name']['ar'] = $data['name']['ar'] ?? $data['name']['ku'];
-
         $data['name']['ku'] = $data['name']['ku'] ?? $data['name']['ar'];
+        $data['name']['en'] = $data['name']['en'] ?? $data['name']['ar'];
 
         if (!is_string($request->image)) {
             $request->validate([
@@ -103,22 +102,23 @@ class CourseController extends Controller
         $data = $request->validate([
             'name.ar' => 'required_without:name.ku|string',
             'name.ku' => 'required_without:name.ar|nullable|string',
+            'name.en' => 'nullable|string',
             'description.ar' => 'required|string',
             'description.ku' => 'required|string',
-            'level_id' => 'required|exists:App\Models\Level,id',
+            'description.en' => 'nullable|string',
             'category_id' => 'required|exists:App\Models\Category,id',
             'chapters' => 'required|array|min:1',
             'chapters.*.name.ar' => 'required|string',
             'chapters.*.name.ku' => 'required|string',
+            'chapters.*.name.en' => 'nullable|string',
             'price' => 'required|numeric',
             'is_featured' => 'required|boolean',
             'image' => 'image|max:4096',
-            'subject_id' => 'required|exists:App\Models\Subject,id',
             'instructor_id' => 'nullable|exists:App\Models\Instructor,id',
         ]);
         $data['name']['ar'] = $data['name']['ar'] ?? $data['name']['ku'];
-
         $data['name']['ku'] = $data['name']['ku'] ?? $data['name']['ar'];
+        $data['name']['en'] = $data['name']['en'] ?? $data['name']['ar'];
         $data['image'] = $request->image->store('/uploads', 'public');
 
         $course = Course::create($data);
@@ -130,9 +130,7 @@ class CourseController extends Controller
     public function create()
     {
         return Inertia::render('Admin/Courses/Create', [
-            'levels' => Level::get(),
-            'categories' => Category::get(),
-            'subjects' => Subject::get(),
+            'categories' => Category::with('children')->get(),
             'instructors' => Instructor::where('is_active', true)->get(),
         ]);
     }

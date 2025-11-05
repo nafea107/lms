@@ -93,18 +93,18 @@
                 >
                     <h1
                         class="font-rabar-022 text-3xl"
-                        v-text="$t('مع یلاكورس')"
+                        v-text="$t('Future Leaders Organization')"
                     ></h1>
                     <img
                         alt="Teacher"
                         class="md:h-56 h-44 max-w-56 object-contain mt-3"
-                        src="/assets/img/green.svg"
+                        src="/assets/img/logo.png"
                     />
 
                     <div class="flex justify-center gap-3 w-full mt-3">
                         <div class="flex flex-col justify-center gap-1">
                             <a
-                                :href="`https://www.facebook.com/profile.php?id=61564226880229`"
+                                :href="`https://www.facebook.com/`"
                                 class="flex gap-1 items-center w-max"
                                 target="_blank"
                             >
@@ -113,11 +113,11 @@
                                     class="size-4"
                                     src="/assets/img/icons/facebook.svg"
                                 />
-                                <span class="text-sm">Yalla Course</span>
+                                <span class="text-sm">futureleaderskrd</span>
                             </a>
 
                             <a
-                                :href="`https://www.instagram.com/yalla.course`"
+                                :href="`https://www.instagram.com/`"
                                 class="flex gap-1 items-center w-max"
                                 target="_blank"
                             >
@@ -126,7 +126,7 @@
                                     class="size-4"
                                     src="/assets/img/icons/instagram.svg"
                                 />
-                                <span class="text-sm">yalla.course</span>
+                                <span class="text-sm">futureleaderskrd</span>
                             </a>
                         </div>
 
@@ -147,7 +147,7 @@
                             </a>
                             <a
                                 class="flex gap-1 items-center w-max"
-                                href="//www.yallcourse.net"
+                                href="https://futureleaderskrd.com/"
                                 target="_blank"
                             >
                                 <img
@@ -155,7 +155,9 @@
                                     class="size-4"
                                     src="/assets/img/icons/world-wide-web@4x.svg"
                                 />
-                                <span class="text-sm">www.yallcourse.net</span>
+                                <span class="text-sm"
+                                    >futureleaderskrd.com</span
+                                >
                             </a>
                         </div>
                     </div>
@@ -177,41 +179,38 @@
                             v-text="$t('قناتنا على یوتوب')"
                         ></h2>
                         <img
-                            alt="Yallacourse Logo"
+                            alt="Future Leaders Organization Logo"
                             class="w-56 mt-12"
-                            src="/assets/img/light-logo.png"
+                            src="/assets/img/logo.png"
                         />
                         <div class="mt-12 flex flex-wrap gap-2">
                             <a href="tel:07510471658" target="_blank">
                                 <img
-                                    alt="Yallacourse phone"
+                                    alt="Future Leaders Organization phone"
                                     class="size-6"
                                     src="/assets/img/icons/light/phone-call@4x.svg"
                                 />
                             </a>
-                            <a href="//yallacourse.net" target="_blank">
+                            <a
+                                href="https://futureleaderskrd.com/"
+                                target="_blank"
+                            >
                                 <img
-                                    alt="Yallacourse site"
+                                    alt="Future Leaders Organization site"
                                     class="size-6"
                                     src="/assets/img/icons/light/world-wide-web@4x.png"
                                 />
                             </a>
-                            <a
-                                href="//www.instagram.com/yalla.course"
-                                target="_blank"
-                            >
+                            <a href="//www.instagram.com/" target="_blank">
                                 <img
-                                    alt="Yallacourse instagram"
+                                    alt="Future Leaders Organization instagram"
                                     class="size-6"
                                     src="/assets/img/icons/light/instagram@4x.svg"
                                 />
                             </a>
-                            <a
-                                href="https://www.facebook.com/profile.php?id=61564226880229"
-                                target="_blank"
-                            >
+                            <a href="https://www.facebook.com/" target="_blank">
                                 <img
-                                    alt="Yallacourse facebook"
+                                    alt="Future Leaders Organization facebook"
                                     class="size-6"
                                     src="/assets/img/icons/light/facebook@4x.svg"
                                 />

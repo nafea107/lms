@@ -97,16 +97,16 @@
                 <!-- Instructor Bio and Details -->
                 <div class="md:w-2/3 p-6 border-t md:border-t-0 md:border-r">
                     <Tabs defaultValue="bio" class="w-full">
-                        <TabsList class="grid w-full grid-cols-3">
+                        <TabsList class="grid w-full grid-cols-1">
                             <TabsTrigger value="bio">{{
                                 $t("السيرة الذاتية")
                             }}</TabsTrigger>
-                            <TabsTrigger value="qualifications">{{
+                            <!-- <TabsTrigger value="qualifications">{{
                                 $t("المؤهلات العلمية")
                             }}</TabsTrigger>
                             <TabsTrigger value="experience">{{
                                 $t("الخبرات العملية")
-                            }}</TabsTrigger>
+                            }}</TabsTrigger> -->
                         </TabsList>
 
                         <TabsContent value="bio" class="mt-4">
@@ -156,7 +156,7 @@
         </div>
 
         <!-- Instructor Courses -->
-        <div class="mt-12">
+        <!-- <div class="mt-12">
             <h2 class="text-2xl font-rabar-021 mb-6">{{ $t("الكورسات") }}</h2>
 
             <div
@@ -211,7 +211,7 @@
                     {{ $t("لا توجد كورسات متاحة لهذا المدرس") }}
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

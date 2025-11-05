@@ -133,10 +133,7 @@
                 </div>
 
                 <div>
-                    <InputLabel
-                        :value="$t('YouTube')"
-                        class="font-rabar-021"
-                    />
+                    <InputLabel :value="$t('YouTube')" class="font-rabar-021" />
 
                     <Input
                         v-model="form.youtube"
@@ -171,10 +168,7 @@
                 </div>
 
                 <div>
-                    <InputLabel
-                        :value="$t('TikTok')"
-                        class="font-rabar-021"
-                    />
+                    <InputLabel :value="$t('TikTok')" class="font-rabar-021" />
 
                     <Input
                         v-model="form.tiktok"
@@ -189,6 +183,24 @@
                     />
                 </div>
 
+                <div class="md:col-span-2">
+                    <InputLabel
+                        :value="$t('نص الفوتر الانجليزي')"
+                        class="font-rabar-021"
+                    />
+
+                    <Textarea
+                        v-model="form.footer_text_en"
+                        :placeholder="$t('نص الفوتر الانجليزي')"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        rows="4"
+                    />
+
+                    <InputError
+                        :message="form.errors['footer_text_en']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
                 <div class="md:col-span-2">
                     <InputLabel
                         :value="$t('نص الفوتر العربي')"

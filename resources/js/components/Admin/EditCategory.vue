@@ -31,6 +31,38 @@
                     </div>
 
                 </div>
+                <div>
+                    <div class="grid grid-cols-4 items-center gap-4">
+                        <InputLabel class="text-right">
+                            {{ $t('الاسم الانجليزي') }}
+                        </InputLabel>
+                        <Input v-model="form.name.en" class="col-span-3"/>
+                    </div>
+                </div>
+                <div>
+                    <div class="grid grid-cols-4 items-center gap-4">
+                        <InputLabel class="text-right">
+                            {{ $t('القسم الرئيسي') }}
+                        </InputLabel>
+                        <Select v-model="form.parent_id" class="col-span-3">
+                            <SelectTrigger>
+                                <SelectValue :placeholder="$t('اختياري - لإنشاء قسم فرعي')" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem :value="null">
+                                    {{ $t("بدون قسم رئيسي") }}
+                                </SelectItem>
+                                <SelectItem
+                                    v-for="category in availableParentCategories"
+                                    :key="category.id"
+                                    :value="category.id"
+                                >
+                                    {{ category.name[locale] }}
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                </div>
             </div>
             <DialogFooter>
                 <DialogClose as-child>
@@ -56,11 +88,18 @@ import {
 import {Input} from '@/components/ui/input'
 import InputLabel from "@/components/InputLabel.vue";
 import {Icon} from "@iconify/vue";
-import {useForm} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import InputError from "@/components/InputError.vue";
-import {reactive} from "vue";
+import {reactive, computed, onMounted, ref} from "vue";
 import Swal from "sweetalert2";
 import {useI18n} from "vue-i18n";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select/index.js";
 
 const props = defineProps({
     category: {
@@ -69,11 +108,34 @@ const props = defineProps({
     },
 })
 const emit = defineEmits(['getData']);
-const {t} = useI18n()
+const {t} = useI18n();
+const page = usePage();
+const locale = page.props.locale;
+const categories = ref([]);
 
 const form = reactive({
     ...props.category,
     _method: 'PUT'
+});
+
+// Filter out the current category and its children from parent options
+const availableParentCategories = computed(() => {
+    return categories.value.filter(cat => 
+        !cat.parent_id && cat.id !== props.category.id
+    );
+});
+
+async function fetchCategories() {
+    try {
+        const res = await axios.get(route("admin.categories.data") + "?per_page=1000");
+        categories.value = res.data.data || [];
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+    }
+}
+
+onMounted(() => {
+    fetchCategories();
 });
 
 async function onSubmit() {

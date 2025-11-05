@@ -20,18 +20,18 @@ export default function useAdminMenu() {
                 label: t("الاقسام"),
                 link: route("admin.categories.index"),
             },
-            {
-                label: t("المواد"),
-                link: route("admin.subjects.index"),
-            },
+            // {
+            //     label: t("المواد"),
+            //     link: route("admin.subjects.index"),
+            // },
             {
                 label: t("المعلمين"),
                 link: route("admin.instructors.index"),
             },
-            {
-                label: t("المراحل"),
-                link: route("admin.levels.index"),
-            },
+            // {
+            //     label: t("المراحل"),
+            //     link: route("admin.levels.index"),
+            // },
             {
                 label: t("المقالات"),
                 link: route("admin.posts.index"),
@@ -43,6 +43,14 @@ export default function useAdminMenu() {
             {
                 label: t("البودكاست"),
                 link: route("admin.podcasts.index"),
+            },
+            {
+                label: t("تصنيفات المكتبة"),
+                link: route("admin.library-categories.index"),
+            },
+            {
+                label: t("الكتب"),
+                link: route("admin.books.index"),
             },
             {
                 label: t("الاشتراكات"),

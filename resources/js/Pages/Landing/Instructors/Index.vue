@@ -1,111 +1,54 @@
 <template>
     <div class="max-w-7xl mx-auto px-3 py-8">
-        <Head :title="$t('المعلمين')" />
-        <h1 class="text-3xl font-rabar-021 text-center mb-8">
-            {{ $t("المعلمين") }}
+        <Head :title="$t('الموظفين')" />
+        <h1 class="text-4xl font-rabar-021 text-center mb-12">
+            {{ $t("الموظفين") }}
         </h1>
 
-        <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-            <div
-                v-for="instructor in instructors"
-                :key="instructor.id"
-                class="bg-white rounded-lg shadow-md overflow-hidden"
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Future Leaders Staff Card -->
+            <Link
+                :href="route('landing.instructors.by-type', { type: 'future_leader' })"
+                class="group"
             >
-                <Link
-                    :href="
-                        route('landing.instructors.show', {
-                            slug: instructor.slug,
-                        })
-                    "
+                <div
+                    class="bg-gradient-to-br from-teal-500 to-teal-600 rounded-3xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 cursor-pointer"
                 >
-                    <div class="relative h-64 overflow-hidden">
-                        <img
-                            v-if="instructor.image"
-                            :src="`/storage/${instructor.image}`"
-                            :alt="instructor.name[locale]"
-                            class="w-full h-full object-cover"
-                        />
-                        <div
-                            v-else
-                            class="w-full h-full bg-gray-200 flex items-center justify-center"
-                        >
+                    <div class="p-12 flex flex-col items-center justify-center min-h-[300px]">
+                        <div class="mb-6">
                             <Icon
-                                icon="mdi:account"
-                                class="w-24 h-24 text-gray-400"
+                                icon="mdi:account-group"
+                                class="w-24 h-24 text-white"
                             />
                         </div>
-                    </div>
-                    <div class="p-4">
-                        <h2 class="text-xl font-rabar-021 mb-2">
-                            {{ instructor.name[locale] }}
+                        <h2 class="text-3xl font-rabar-021 text-white text-center">
+                            {{ $t("موظفي القادة المستقبليين") }}
                         </h2>
-                        <p
-                            v-if="instructor.specialty"
-                            class="text-gray-600 mb-3"
-                        >
-                            {{ instructor.specialty }}
-                        </p>
-                        <p
-                            v-if="instructor.bio && instructor.bio[locale]"
-                            class="text-gray-700 line-clamp-3"
-                        >
-                            {{ instructor.bio[locale] }}
-                        </p>
-
-                        <div class="mt-4 flex justify-between items-center">
-                            <div class="flex space-x-2 rtl:space-x-reverse">
-                                <a
-                                    v-if="instructor.facebook_url"
-                                    :href="instructor.facebook_url"
-                                    target="_blank"
-                                    class="text-blue-600 hover:text-blue-800"
-                                >
-                                    <Icon icon="mdi:facebook" class="w-5 h-5" />
-                                </a>
-                                <a
-                                    v-if="instructor.twitter_url"
-                                    :href="instructor.twitter_url"
-                                    target="_blank"
-                                    class="text-blue-400 hover:text-blue-600"
-                                >
-                                    <Icon icon="mdi:twitter" class="w-5 h-5" />
-                                </a>
-                                <a
-                                    v-if="instructor.linkedin_url"
-                                    :href="instructor.linkedin_url"
-                                    target="_blank"
-                                    class="text-blue-700 hover:text-blue-900"
-                                >
-                                    <Icon icon="mdi:linkedin" class="w-5 h-5" />
-                                </a>
-                                <a
-                                    v-if="instructor.instagram_url"
-                                    :href="instructor.instagram_url"
-                                    target="_blank"
-                                    class="text-pink-600 hover:text-pink-800"
-                                >
-                                    <Icon
-                                        icon="mdi:instagram"
-                                        class="w-5 h-5"
-                                    />
-                                </a>
-                            </div>
-
-                            <Button variant="outline" size="sm">
-                                {{ $t("عرض الملف الشخصي") }}
-                            </Button>
-                        </div>
                     </div>
-                </Link>
-            </div>
-        </div>
+                </div>
+            </Link>
 
-        <div v-if="instructors.length === 0" class="text-center py-12">
-            <div class="text-gray-500 text-xl">
-                {{ $t("لا يوجد مدرسين متاحين حالياً") }}
-            </div>
+            <!-- Trainers Card -->
+            <Link
+                :href="route('landing.instructors.by-type', { type: 'trainer' })"
+                class="group"
+            >
+                <div
+                    class="bg-gradient-to-br from-lime-600 to-lime-700 rounded-3xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 cursor-pointer"
+                >
+                    <div class="p-12 flex flex-col items-center justify-center min-h-[300px]">
+                        <div class="mb-6">
+                            <Icon
+                                icon="mdi:teach"
+                                class="w-24 h-24 text-white"
+                            />
+                        </div>
+                        <h2 class="text-3xl font-rabar-021 text-white text-center">
+                            {{ $t("المدربين") }}
+                        </h2>
+                    </div>
+                </div>
+            </Link>
         </div>
     </div>
 </template>
@@ -113,18 +56,9 @@
 <script setup>
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
-import { usePage } from "@inertiajs/vue3";
 import { Icon } from "@iconify/vue";
-import { Button } from "@/components/ui/button";
 
 defineOptions({
     layout: LandingLayout,
 });
-
-const props = defineProps({
-    instructors: Array,
-});
-
-const page = usePage();
-const locale = page.props.locale;
 </script>

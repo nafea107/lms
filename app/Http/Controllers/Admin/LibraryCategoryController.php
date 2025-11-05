@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\LibraryCategory;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class LibraryCategoryController extends Controller
+{
+    public function index()
+    {
+        return Inertia::render('Admin/Library/Categories/Index');
+    }
+
+    public function data()
+    {
+        $items = LibraryCategory::when(isset($_GET['search']), function ($query) {
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%' . $_GET['search'] . '%');
+            });
+        })
+            ->withCount('books')
+            ->latest()
+            ->paginate(25);
+
+        $itemsArray = $items->toArray();
+        $itemsArray['total_pages'] = $items->lastPage();
+
+        return $itemsArray;
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name.ku' => ['required', 'string', 'max:255'],
+            'name.ar' => ['required', 'string', 'max:255'],
+            'name.en' => ['required', 'string', 'max:255'],
+            'color' => ['required', 'string', 'max:7'],
+        ]);
+
+        LibraryCategory::create([
+            'name' => request('name'),
+            'color' => request('color'),
+        ]);
+    }
+
+    public function update(Request $request, $locale, LibraryCategory $libraryCategory)
+    {
+        $request->validate([
+            'name.ku' => ['required', 'string', 'max:255'],
+            'name.ar' => ['required', 'string', 'max:255'],
+            'name.en' => ['required', 'string', 'max:255'],
+            'color' => ['required', 'string', 'max:7'],
+        ]);
+
+        $libraryCategory->update([
+            'name' => request('name'),
+            'color' => request('color'),
+        ]);
+    }
+
+    public function destroy($locale, LibraryCategory $libraryCategory)
+    {
+        if ($libraryCategory) {
+            $libraryCategory->delete();
+            return response()->json(['message' => 'Deleted Successfully'], 200);
+        }
+    }
+}

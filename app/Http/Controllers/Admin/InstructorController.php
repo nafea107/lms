@@ -60,15 +60,19 @@ class InstructorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'name.en' => 'nullable|string|max:255',
             'name.ar' => 'required|string|max:255',
             'name.ku' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:20',
             'specialty' => 'nullable|string|max:255',
+            'bio.en' => 'nullable|string',
             'bio.ar' => 'nullable|string',
             'bio.ku' => 'nullable|string',
+            'qualifications.en' => 'nullable|string',
             'qualifications.ar' => 'nullable|string',
             'qualifications.ku' => 'nullable|string',
+            'experience.en' => 'nullable|string',
             'experience.ar' => 'nullable|string',
             'experience.ku' => 'nullable|string',
             'facebook_url' => 'nullable|url|max:255',
@@ -77,6 +81,7 @@ class InstructorController extends Controller
             'instagram_url' => 'nullable|url|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => 'boolean',
+            'type' => 'required|in:future_leader,trainer',
         ]);
 
         if ($validator->fails()) {
@@ -114,15 +119,19 @@ class InstructorController extends Controller
     public function update(Request $request, $locale, Instructor $instructor)
     {
         $validator = Validator::make($request->all(), [
+            'name.en' => 'nullable|string|max:255',
             'name.ar' => 'required|string|max:255',
             'name.ku' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:20',
             'specialty' => 'nullable|string|max:255',
+            'bio.en' => 'nullable|string',
             'bio.ar' => 'nullable|string',
             'bio.ku' => 'nullable|string',
+            'qualifications.en' => 'nullable|string',
             'qualifications.ar' => 'nullable|string',
             'qualifications.ku' => 'nullable|string',
+            'experience.en' => 'nullable|string',
             'experience.ar' => 'nullable|string',
             'experience.ku' => 'nullable|string',
             'facebook_url' => 'nullable|url|max:255',
@@ -131,6 +140,7 @@ class InstructorController extends Controller
             'instagram_url' => 'nullable|url|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active' => 'boolean',
+            'type' => 'required|in:future_leader,trainer',
         ]);
 
         if ($validator->fails()) {

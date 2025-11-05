@@ -12,13 +12,13 @@ class SetLocaleMiddleware
     public function handle(Request $request, Closure $next)
     {
         $segmant = !empty($request->segments()) ? $request->segments()[0] : null;
-        $locale = $segmant ?? 'ar';
+        $locale = $segmant ?? 'en';
 
 
-        if (!in_array($locale, ['ku', 'ar']) && Route::current()?->parameter('locale') !== null) {
+        if (!in_array($locale, ['ku', 'ar', 'en']) && Route::current()?->parameter('locale') !== null) {
             return abort(404);
         }
-        if (in_array($locale, ['ku', 'ar'])) {
+        if (in_array($locale, ['ku', 'ar', 'en'])) {
             app()->setLocale($locale);
         }
         //URL::forceScheme('https');

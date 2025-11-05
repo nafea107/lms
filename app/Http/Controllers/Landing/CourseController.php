@@ -18,7 +18,7 @@ class CourseController extends Controller
     public function index(Request $request, $locale = null, $subject = null)
     {
         $subjectId = $subject ?? $request->subject;
-        $query = Course::query()->with('category', 'level', 'instructor');
+        $query = Course::query()->with('category', 'instructor');
 
         if ($subjectId) {
             $query->where('subject_id', $subjectId);

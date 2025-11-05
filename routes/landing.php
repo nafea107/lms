@@ -12,6 +12,10 @@ Route::name('landing.')->group(function () {
 
     Route::get('/courses', [App\Http\Controllers\Landing\CourseController::class, 'index'])->name('courses');
     Route::get('/courses/subject/{subject?}', [App\Http\Controllers\Landing\CourseController::class, 'index'])->name('courses.by-subject');
+    
+    // Categories routes
+    Route::get('/categories', [App\Http\Controllers\Landing\CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/{category}/courses', [App\Http\Controllers\Landing\CategoryController::class, 'courses'])->name('categories.courses');
 
     Route::middleware('auth')->group(function () {
         Route::get('/lessons/{lesson}', [App\Http\Controllers\Landing\LessonController::class, 'show'])->name('lessons.show');
@@ -26,10 +30,16 @@ Route::name('landing.')->group(function () {
 
     // Instructors routes
     Route::get('/pages/instructors', [App\Http\Controllers\Landing\InstructorController::class, 'index'])->name('instructors.index');
+    Route::get('/pages/instructors/{type}', [App\Http\Controllers\Landing\InstructorController::class, 'byType'])->name('instructors.by-type');
     Route::get('/pages/instructor/{slug}', [App\Http\Controllers\Landing\InstructorController::class, 'show'])->name('instructors.show');
 
     // Podcasts routes
     Route::get('/podcasts', [App\Http\Controllers\Landing\PodcastController::class, 'index'])->name('podcasts.index');
+
+    // Library routes
+    Route::get('/library', [App\Http\Controllers\Landing\LibraryController::class, 'index'])->name('library.index');
+    Route::get('/library/category/{category}', [App\Http\Controllers\Landing\LibraryController::class, 'byCategory'])->name('library.by-category');
+    Route::get('/library/book/{book}', [App\Http\Controllers\Landing\LibraryController::class, 'show'])->name('library.book.show');
 
     Route::get('/pages/{page}', [App\Http\Controllers\Landing\PageController::class, 'show'])->name('pages.show');
 

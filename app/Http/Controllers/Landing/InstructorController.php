@@ -14,10 +14,26 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        $instructors = Instructor::where('is_active', true)->get();
+        return Inertia::render('Landing/Instructors/Index');
+    }
 
-        return Inertia::render('Landing/Instructors/Index', [
+    /**
+     * Display instructors by type (category).
+     */
+    public function byType($locale, $type)
+    {
+        // Validate type
+        if (!in_array($type, ['future_leader', 'trainer'])) {
+            abort(404);
+        }
+
+        $instructors = Instructor::where('is_active', true)
+            ->where('type', $type)
+            ->get();
+
+        return Inertia::render('Landing/Instructors/ByType', [
             'instructors' => $instructors,
+            'type' => $type,
         ]);
     }
 
@@ -32,7 +48,7 @@ class InstructorController extends Controller
 
         // Get courses taught by this instructor
         $courses = $instructor->courses()
-            ->with('category', 'level')
+            ->with('category')
             ->latest()
             ->get();
 

@@ -20,7 +20,6 @@ class SearchController extends Controller
     {
         $searchTerm = $this->getRequest('s');
         $per_page = $this->getRequest('per_page') ?? 18;
-        $level = $this->getRequest('level');
         $category = $this->getRequest('category');
 
         $results = Course::with('lessons')
@@ -31,8 +30,6 @@ class SearchController extends Controller
                     });
             })->when($category, function (Builder $builder) use ($category) {
                 $builder->where('category_id', $category);
-            })->when($category,  function (Builder $builder) use ($level) {
-                $builder->where('level_id', $level);
             })
             ->paginate($per_page);
 

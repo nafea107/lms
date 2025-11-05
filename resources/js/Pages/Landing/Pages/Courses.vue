@@ -19,12 +19,9 @@
             </div>
 
             <LevelsAndCategories
-                @onLevelChange="onLevelChange"
                 @onCatagoryChange="onCatagoryChange"
                 :selected-catagory="data.category"
-                :selected-level="data.level"
                 class="lg:max-w-64 w-full"
-                :levels="levels"
                 :categories="categories"
             />
 
@@ -70,7 +67,6 @@ defineOptions({
 });
 const props = defineProps({
     search: String,
-    levels: Array,
     categories: Array,
     page: Object,
     footerPage: Object,
@@ -84,7 +80,6 @@ const params = new URLSearchParams(page.url);
 const data = useRemember(
     {
         page: params.get("page") ?? 1,
-        level: params.get("level") ?? "",
         category: params.get("category") ?? "",
         items: [],
         total_pages: 1,
@@ -100,10 +95,6 @@ function onPageChange(val) {
     data.value.page = val;
     getItems();
 }
-function onLevelChange(event) {
-    data.value.level = event;
-    getItems();
-}
 function onCatagoryChange(event) {
     data.value.category = event;
     getItems();
@@ -117,7 +108,6 @@ async function getItems() {
                 s: data.value.s,
                 page: data.value.page,
                 per_page: data.value.per_page,
-                level: data.value.level,
                 category: data.value.category,
             },
         })

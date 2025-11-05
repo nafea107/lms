@@ -49,6 +49,26 @@
 
                 <div>
                     <InputLabel
+                        :value="$t('الاسم الانجليزي')"
+                        class="font-rabar-021"
+                    />
+
+                    <Input
+                        v-model="form.name.en"
+                        :placeholder="$t('الاسم الانجليزي')"
+                        autocomplete="name"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        type="text"
+                    />
+
+                    <InputError
+                        :message="form.errors['name.en']"
+                        class="mt-2 font-rabar-022"
+                    />
+                </div>
+
+                <div>
+                    <InputLabel
                         :value="$t('الوصف العربي')"
                         class="font-rabar-021"
                     />
@@ -92,70 +112,20 @@
 
                 <div>
                     <InputLabel
-                        :value="$t('المرحلة')"
+                        :value="$t('الوصف الانجليزي')"
                         class="font-rabar-021"
-                        for="email"
                     />
 
-                    <Select
-                        v-model="form.level_id"
-                        class="focus-visible:ring-0"
-                    >
-                        <SelectTrigger
-                            class="bg-transparent border-emerald-700 focus:ring-0 mt-2"
-                        >
-                            <SelectValue
-                                :placeholder="$t('المرحلة')"
-                                class="w-full flex justify-end"
-                            />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem
-                                v-for="level in levels"
-                                :key="level.id"
-                                :value="level.id"
-                            >
-                                {{ level.name[locale] }}
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
+                    <Textarea
+                        v-model="form.description.en"
+                        :placeholder="$t('الوصف الانجليزي')"
+                        autocomplete="description"
+                        class="mt-2 block w-full bg-transparent border-emerald-700 focus-visible:ring-0"
+                        type="text"
+                    />
+
                     <InputError
-                        :message="form.errors.level_id"
-                        class="mt-2 font-rabar-022"
-                    />
-                </div>
-
-                <div>
-                    <InputLabel
-                        :value="$t('المادة')"
-                        class="font-rabar-021"
-                        for="email"
-                    />
-
-                    <Select
-                        v-model="form.subject_id"
-                        class="focus-visible:ring-0"
-                    >
-                        <SelectTrigger
-                            class="bg-transparent border-emerald-700 focus:ring-0 mt-2"
-                        >
-                            <SelectValue
-                                :placeholder="$t('المادة')"
-                                class="w-full flex justify-end"
-                            />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem
-                                v-for="subject in subjects"
-                                :key="subject.id"
-                                :value="subject.id"
-                            >
-                                {{ subject.name[locale] }}
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
-                    <InputError
-                        :message="form.errors.subject_id"
+                        :message="form.errors['description.en']"
                         class="mt-2 font-rabar-022"
                     />
                 </div>
@@ -179,14 +149,26 @@
                                 class="w-full flex justify-end"
                             />
                         </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem
-                                v-for="category in categories"
+                        <SelectContent class="max-h-[300px]">
+                            <template
+                                v-for="category in mainCategories"
                                 :key="category.id"
-                                :value="category.id"
                             >
-                                {{ category.name[locale] }}
-                            </SelectItem>
+                                <SelectItem
+                                    :value="category.id"
+                                    class="font-semibold"
+                                >
+                                    {{ category.name[locale] }}
+                                </SelectItem>
+                                <SelectItem
+                                    v-for="subCategory in category.children"
+                                    :key="subCategory.id"
+                                    :value="subCategory.id"
+                                    class="ps-6"
+                                >
+                                    ↳ {{ subCategory.name[locale] }}
+                                </SelectItem>
+                            </template>
                         </SelectContent>
                     </Select>
                     <InputError
@@ -300,7 +282,7 @@
                     />
                 </div>
 
-                <div>
+                <!-- <div>
                     <InputLabel
                         :value="$t('المستوى')"
                         class="font-rabar-021"
@@ -333,13 +315,13 @@
                         :message="form.errors.level_id"
                         class="mt-2 font-rabar-022"
                     />
-                </div>
+                </div> -->
             </div>
 
             <div class="h-[1px] bg-gray-300/70 mt-4 w-full"></div>
             <LangTabs
                 v-model="currentLang"
-                :langs="['ar', 'ku']"
+                :langs="['ar', 'ku', 'en']"
                 class="mt-4"
             />
             <div
@@ -354,7 +336,9 @@
                             :value="
                                 currentLang === 'ar'
                                     ? $t('الاسم العربي')
-                                    : $t('الاسم الكردي')
+                                    : currentLang === 'ku'
+                                    ? $t('الاسم الكردي')
+                                    : $t('الاسم الانجليزي')
                             "
                             class="font-rabar-021"
                         />
@@ -384,8 +368,10 @@
                         v-model="chapter.name[currentLang]"
                         :placeholder="
                             currentLang === 'ar'
-                                ? chapter.name.ku
-                                : chapter.name.ar
+                                ? chapter.name.ku || chapter.name.en
+                                : currentLang === 'ku'
+                                ? chapter.name.ar || chapter.name.en
+                                : chapter.name.ar || chapter.name.ku
                         "
                         autocomplete="name"
                         autofocus
@@ -433,7 +419,7 @@ import InputLabel from "@/components/InputLabel.vue";
 import { Input } from "@/components/ui/input/index.js";
 import { useI18n } from "vue-i18n";
 import LangTabs from "@/components/LangTabs.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { Icon } from "@iconify/vue";
 import { Checkbox } from "@/components/ui/checkbox";
 import Swal from "sweetalert2";
@@ -445,8 +431,6 @@ defineOptions({
 
 const props = defineProps({
     categories: Array,
-    levels: Array,
-    subjects: Array,
     instructors: Array,
 });
 
@@ -459,14 +443,14 @@ const form = useForm({
     name: {
         ar: "",
         ku: "",
+        en: "",
     },
     description: {
         ar: "",
         ku: "",
+        en: "",
     },
-    level_id: "",
     category_id: "",
-    subject_id: "",
     instructor_id: "",
     price: 0,
     is_featured: false,
@@ -480,9 +464,15 @@ function chapter() {
         name: {
             ar: "",
             ku: "",
+            en: "",
         },
     };
 }
+
+// Computed property to get main categories with children
+const mainCategories = computed(() => {
+    return props.categories.filter((cat) => !cat.parent_id);
+});
 
 function addChapter() {
     form.chapters.push(chapter()); // Use deep clone when adding

@@ -14,21 +14,35 @@
             </DialogHeader>
             <div class="grid gap-4 max-h-[70vh] overflow-y-auto p-2">
                 <Tabs defaultValue="basic" class="w-full">
-                    <TabsList class="grid w-full grid-cols-3">
+                    <TabsList class="grid w-full grid-cols-2">
                         <TabsTrigger value="basic">{{
                             $t("المعلومات الأساسية")
                         }}</TabsTrigger>
-                        <TabsTrigger value="bio">{{
+                        <!-- <TabsTrigger value="bio">{{
                             $t("السيرة الذاتية")
                         }}</TabsTrigger>
                         <TabsTrigger value="social">{{
                             $t("التواصل الاجتماعي")
-                        }}</TabsTrigger>
+                        }}</TabsTrigger> -->
                     </TabsList>
 
                     <!-- Basic Information Tab -->
                     <TabsContent value="basic">
                         <div class="space-y-4">
+                            <div>
+                                <div
+                                    class="grid grid-cols-4 items-center gap-4"
+                                >
+                                    <InputLabel class="text-right">
+                                        {{ $t("الاسم الانجليزي") }}
+                                    </InputLabel>
+                                    <Input
+                                        v-model="form.name.en"
+                                        class="col-span-3"
+                                    />
+                                </div>
+                            </div>
+
                             <div>
                                 <div
                                     class="grid grid-cols-4 items-center gap-4"
@@ -124,6 +138,22 @@
                                     class="grid grid-cols-4 items-center gap-4"
                                 >
                                     <InputLabel class="text-right">
+                                        {{ $t("نوع الموظف") }}
+                                    </InputLabel>
+                                    <select
+                                        v-model="form.type"
+                                        class="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    >
+                                        <option value="trainer">{{ $t("مدرب") }}</option>
+                                        <option value="future_leader">{{ $t("موظف قادة المستقبل") }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="grid grid-cols-4 items-center gap-4"
+                                >
+                                    <InputLabel class="text-right">
                                         {{ $t("الحالة") }}
                                     </InputLabel>
                                     <div class="col-span-3 flex items-center">
@@ -152,15 +182,24 @@
                         <div class="space-y-4">
                             <div>
                                 <InputLabel class="mb-2 block">
-                                    {{ $t("السيرة الذاتية (عربي)") }}
+                                    {{ $t("السيرة الذاتية (انجليزي)") }}
                                 </InputLabel>
-                                <Textarea v-model="form.bio.ar" rows="5" />
+                                <Textarea v-model="form.bio.en" rows="5" />
                             </div>
                             <div>
                                 <InputLabel class="mb-2 block">
                                     {{ $t("السيرة الذاتية (كردي)") }}
                                 </InputLabel>
                                 <Textarea v-model="form.bio.ku" rows="5" />
+                            </div>
+                            <div>
+                                <InputLabel class="mb-2 block">
+                                    {{ $t("المؤهلات العلمية (انجليزي)") }}
+                                </InputLabel>
+                                <Textarea
+                                    v-model="form.qualifications.en"
+                                    rows="5"
+                                />
                             </div>
                             <div>
                                 <InputLabel class="mb-2 block">
@@ -177,6 +216,15 @@
                                 </InputLabel>
                                 <Textarea
                                     v-model="form.qualifications.ku"
+                                    rows="5"
+                                />
+                            </div>
+                            <div>
+                                <InputLabel class="mb-2 block">
+                                    {{ $t("المؤهلات العلمية (انجليزي)") }}
+                                </InputLabel>
+                                <Textarea
+                                    v-model="form.qualifications.en"
                                     rows="5"
                                 />
                             </div>
@@ -313,9 +361,11 @@ const form = reactive({
     _method: "PUT",
     image: null,
     // Ensure nested objects exist
-    bio: props.instructor.bio || { ar: "", ku: "" },
-    qualifications: props.instructor.qualifications || { ar: "", ku: "" },
-    experience: props.instructor.experience || { ar: "", ku: "" },
+    name: props.instructor.name || { en: "", ar: "", ku: "" },
+    bio: props.instructor.bio || { en: "", ar: "", ku: "" },
+    qualifications: props.instructor.qualifications || { en: "", ar: "", ku: "" },
+    experience: props.instructor.experience || { en: "", ar: "", ku: "" },
+    type: props.instructor.type || "trainer",
 });
 
 function handleImageUpload(event) {
@@ -324,15 +374,19 @@ function handleImageUpload(event) {
 
 async function onSubmit() {
     const formData = new FormData();
+    formData.append("name[en]", form.name?.en || "");
     formData.append("name[ar]", form.name.ar);
     formData.append("name[ku]", form.name.ku);
     formData.append("email", form.email || "");
     formData.append("phone", form.phone || "");
     formData.append("specialty", form.specialty || "");
+    formData.append("bio[en]", form.bio?.en || "");
     formData.append("bio[ar]", form.bio?.ar || "");
     formData.append("bio[ku]", form.bio?.ku || "");
+    formData.append("qualifications[en]", form.qualifications?.en || "");
     formData.append("qualifications[ar]", form.qualifications?.ar || "");
     formData.append("qualifications[ku]", form.qualifications?.ku || "");
+    formData.append("experience[en]", form.experience?.en || "");
     formData.append("experience[ar]", form.experience?.ar || "");
     formData.append("experience[ku]", form.experience?.ku || "");
     formData.append("facebook_url", form.facebook_url || "");
@@ -340,6 +394,7 @@ async function onSubmit() {
     formData.append("linkedin_url", form.linkedin_url || "");
     formData.append("instagram_url", form.instagram_url || "");
     formData.append("is_active", form.is_active ? 1 : 0);
+    formData.append("type", form.type || "trainer");
     formData.append("_method", "PUT");
 
     if (form.image) {

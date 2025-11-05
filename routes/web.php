@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect(app()->getLocale());
 });
 
-Route::prefix('{locale}')->whereIn('locale', ['ar', 'ku'])->group(function () {
+Route::prefix('{locale}')->whereIn('locale', ['ar', 'ku', 'en'])->group(function () {
     require __DIR__ . '/landing.php';
     require __DIR__ . '/admin.php';
     require __DIR__ . '/auth.php';
@@ -25,8 +25,4 @@ Route::prefix('{locale}')->whereIn('locale', ['ar', 'ku'])->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-
-
 });
-
-

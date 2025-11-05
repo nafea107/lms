@@ -68,4 +68,15 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     // posts
     Route::get('/posts/data', [App\Http\Controllers\Admin\PostController::class, 'data'])->name('posts.data');
     Route::resource('/posts', App\Http\Controllers\Admin\PostController::class);
+
+    // library categories
+    Route::get('/library-categories', [App\Http\Controllers\Admin\LibraryCategoryController::class, 'index'])->name('library-categories.index');
+    Route::get('/library-categories/data', [App\Http\Controllers\Admin\LibraryCategoryController::class, 'data'])->name('library-categories.data');
+    Route::post('/library-categories/store', [App\Http\Controllers\Admin\LibraryCategoryController::class, 'store'])->name('library-categories.store');
+    Route::put('/library-categories/{libraryCategory}/update', [App\Http\Controllers\Admin\LibraryCategoryController::class, 'update'])->name('library-categories.update');
+    Route::delete('/library-categories/{libraryCategory}/destroy', [App\Http\Controllers\Admin\LibraryCategoryController::class, 'destroy'])->name('library-categories.destroy');
+
+    // books
+    Route::get('/books/data', [App\Http\Controllers\Admin\BookController::class, 'data'])->name('books.data');
+    Route::resource('/books', App\Http\Controllers\Admin\BookController::class);
 });

@@ -16,6 +16,10 @@
                     <TableHead class="text-start text-gray-700">
                         {{ $t('الاسم') }}
                     </TableHead>
+                    
+                    <TableHead class="text-start text-gray-700">
+                        {{ $t('القسم الرئيسي') }}
+                    </TableHead>
 
                     <TableCell class="text-end text-gray-700">
                         {{ $t('الادوات') }}
@@ -26,6 +30,15 @@
             <TableBody v-if="!isLoading">
                 <TableRow v-for="row in tableData?.data" :key="row.id">
                     <TableCell v-text="row.name[locale]">
+                    </TableCell>
+                    
+                    <TableCell>
+                        <span v-if="row.parent" class="text-gray-600">
+                            {{ row.parent.name[locale] }}
+                        </span>
+                        <span v-else class="text-gray-400 text-sm">
+                            {{ $t('قسم رئيسي') }}
+                        </span>
                     </TableCell>
 
                     <TableCell class="flex justify-end ">

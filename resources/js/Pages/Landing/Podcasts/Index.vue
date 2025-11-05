@@ -111,14 +111,14 @@
 </template>
 
 <script setup>
-import PodcastLayout from "@/Layouts/PodcastLayout.vue";
+import LandingLayout from "@/Layouts/LandingLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { usePage } from "@inertiajs/vue3";
 import { Icon } from "@iconify/vue";
 import { Button } from "@/components/ui/button";
 
 defineOptions({
-    layout: PodcastLayout,
+    layout: LandingLayout,
 });
 
 const props = defineProps({

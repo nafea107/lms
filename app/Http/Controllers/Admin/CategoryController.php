@@ -17,11 +17,12 @@ class CategoryController extends Controller
 
     public function data()
     {
-        $items = Category::when(isset($_GET['search']), function ($query) {
-            $query->where(function ($q) {
-                $q->where('name', 'like', '%' . $_GET['search'] . '%');
-            });
-        })
+        $items = Category::with('parent')
+            ->when(isset($_GET['search']), function ($query) {
+                $query->where(function ($q) {
+                    $q->where('name', 'like', '%' . $_GET['search'] . '%');
+                });
+            })
             ->latest()
             ->paginate(25);
 
@@ -36,10 +37,12 @@ class CategoryController extends Controller
         $request->validate([
             'name.ku' => ['required', 'string', 'max:255'],
             'name.ar' => ['required', 'string', 'max:255'],
+            'parent_id' => ['nullable', 'exists:categories,id'],
         ]);
 
         Category::create([
             'name' => request('name'),
+            'parent_id' => request('parent_id'),
         ]);
 
     }
@@ -49,10 +52,17 @@ class CategoryController extends Controller
         $request->validate([
             'name.ku' => ['required', 'string', 'max:255'],
             'name.ar' => ['required', 'string', 'max:255'],
+            'parent_id' => ['nullable', 'exists:categories,id'],
         ]);
+
+        // Prevent setting parent to itself or its own children
+        if (request('parent_id') && request('parent_id') == $category->id) {
+            return response()->json(['message' => 'Cannot set category as its own parent'], 422);
+        }
 
         $category->update([
             'name' => request('name'),
+            'parent_id' => request('parent_id'),
         ]);
 
 

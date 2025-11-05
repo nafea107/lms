@@ -4,7 +4,7 @@
             <!-- Logo Section -->
             <div class="logo-container">
                 <img
-                    src="/assets/img/light-logo.png"
+                    src="/assets/img/logo.png"
                     alt="Future Leaders Organization Logo"
                     class="hero-logo"
                 />

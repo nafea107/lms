@@ -73,7 +73,8 @@ class Instructor extends Model
         'linkedin_url',
         'instagram_url',
         'slug',
-        'is_active'
+        'is_active',
+        'type'
     ];
 
     protected $casts = [
