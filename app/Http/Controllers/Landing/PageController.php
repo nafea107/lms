@@ -74,10 +74,12 @@ class PageController extends Controller
     {
         $page = Page::where('slug', 'about')->first();
         $whatsapp = Setting::where('key', 'whatsapp')->first()?->value;
+        $footerPage = Page::where('slug', 'footer')->first();
 
         return Inertia::render('Landing/Pages/About', [
             'page' => $page,
-            'whatsapp' => $whatsapp
+            'whatsapp' => $whatsapp,
+            'footerPage' => $footerPage
         ]);
     }
 

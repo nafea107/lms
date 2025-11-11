@@ -174,10 +174,10 @@
                     class="flex md:flex-row flex-col justify-center items-center gap-4"
                 >
                     <div class="p-3 md:basis-1/2 flex flex-col items-center">
-                        <h2
+                        <!-- <h2
                             class="text-5xl font-rabar-021 text-center text-white"
                             v-text="$t('قناتنا على یوتوب')"
-                        ></h2>
+                        ></h2> -->
                         <img
                             alt="Future Leaders Organization Logo"
                             class="w-56 mt-12"
@@ -225,7 +225,7 @@
                             frameborder="0"
                             height="720"
                             referrerpolicy="strict-origin-when-cross-origin"
-                            src="https://www.youtube.com/embed/R0GdXyU18LI"
+                            :src="footerPage?.data?.youtube_url?.value || 'https://www.youtube.com/embed/R0GdXyU18LI'"
                             title="October 27, 2024"
                             width="1280"
                         ></iframe>
@@ -237,18 +237,27 @@
                         <p
                             v-if="locale === 'ar'"
                             v-text="
-                                page?.data?.footer_text_ar?.value ||
+                                footerPage?.data?.footer_text_ar?.value ||
                                 $t(
                                     'يلا كورس هي منصة تعليمية متكاملة تم إنشاؤها في 15 أغسطس 2024، بهدف تمكين المعلمين من بناء علاماتهم الشخصية وتقديم دورات تعليمية عالية الجودة. نسعى من خلال خدماتنا المتنوعة إلى دعم المعلمين والمدربين في تقديم تجارب تعليمية مميزة للطلاب في مختلف المراحل. بإدارة شاهين راشد، نطمح إلى أن نصبح الوجهة الأولى للمعلمين في مجتمعنا، لتطوير أدواتهم التعليمية وبناء مستقبل مشرق للتعليم'
                                 )
                             "
                         ></p>
                         <p
-                            v-else
+                            v-else-if="locale === 'ku'"
                             v-text="
-                                page?.data?.footer_text_ku?.value ||
+                                footerPage?.data?.footer_text_ku?.value ||
                                 $t(
                                     'یەڵا کۆرس پلاتفۆرمێکی تەواوی فێرکارییە کە لە ١٥ی ئابی ٢٠٢٤ دروستکراوە، بە ئامانجی بەهێزکردنی مامۆستایان لە دروستکردنی برەندی تایبەتی خۆیان و پێشکەشکردنی کۆرسی فێرکاری بەرز. ئێمە هەوڵ دەدەین لە رێگەی خزمەتگوزارییە جۆراوجۆرەکانمانەوە، پشتگیری مامۆستایان و راهێنەران بکەین لە پێشکەشکردنی ئەزموونی فێرکاری تایبەت بە قوتابیان لە قۆناغە جیاوازەکاندا. بە بەڕێوەبردنی شاهین راشد، ئامانجمان ئەوەیە ببینە وێستگەی یەکەمی مامۆستایان لە کۆمەڵگای خۆماندا، بۆ پەرەپێدانی کەرەستەکانی فێرکردن و بنیاتنانی داهاتوویەکی گەش بۆ پەروەردە'
+                                )
+                            "
+                        ></p>
+                        <p
+                            v-else
+                            v-text="
+                                footerPage?.data?.footer_text_en?.value ||
+                                $t(
+                                    'Yalla Course is a comprehensive educational platform created on August 15, 2024, with the goal of empowering teachers to build their personal brands and deliver high-quality educational courses. Through our diverse services, we strive to support teachers and trainers in providing exceptional educational experiences for students at various stages. Under the management of Shaheen Rashid, we aspire to become the first destination for teachers in our community, to develop their educational tools and build a bright future for education.'
                                 )
                             "
                         ></p>
@@ -267,6 +276,7 @@ import { usePage } from "@inertiajs/vue3";
 const props = defineProps({
     data: Object,
     page: Object,
+    footerPage: Object,
 });
 
 const page = usePage();

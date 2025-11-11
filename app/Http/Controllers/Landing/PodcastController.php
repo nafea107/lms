@@ -20,4 +20,11 @@ class PodcastController extends Controller
             'podcasts' => $podcasts,
         ]);
     }
+
+    public function show(string $locale, Podcast $podcast)
+    {
+        return Inertia::render('Landing/Podcasts/Show', [
+            'podcast' => $podcast,
+        ]);
+    }
 }

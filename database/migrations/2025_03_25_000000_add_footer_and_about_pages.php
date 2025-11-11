@@ -1,55 +1,15 @@
 <?php
 
-namespace Database\Seeders;
-
+use Illuminate\Database\Migrations\Migration;
 use App\Models\Page;
-use Illuminate\Database\Seeder;
 
-class PageSeeder extends Seeder
-{
-    public function run(): void
+return new class extends Migration {
+    public function up(): void
     {
-        $pages = [
+        // Create footer page
+        Page::updateOrCreate(
+            ['slug' => 'footer'],
             [
-                'slug' => 'home',
-                'name' => 'home',
-                'data' => [
-                    'image_1' => [
-                        'type' => 'image',
-                        'value' => null,
-                    ],
-                    'image_2' => [
-                        'type' => 'image',
-                        'value' => null,
-                    ]
-                ],
-            ],
-
-            [
-                'slug' => 'instructor',
-                'name' => 'instructor',
-                'data' => [
-                    'photo' => [
-                        'type' => 'image',
-                        'value' => null,
-                    ],
-                    'specialization' => [
-                        'type' => 'text',
-                        'value' => null,
-                    ],
-                    'career' => [
-                        'type' => 'text',
-                        'value' => null,
-                    ],
-                    'slogan' => [
-                        'type' => 'text',
-                        'value' => null,
-                    ],
-                ],
-            ],
-
-            [
-                'slug' => 'footer',
                 'name' => 'footer',
                 'data' => [
                     'youtube_url' => [
@@ -69,10 +29,13 @@ class PageSeeder extends Seeder
                         'value' => 'یەڵا کۆرس پلاتفۆرمێکی تەواوی فێرکارییە کە لە ١٥ی ئابی ٢٠٢٤ دروستکراوە، بە ئامانجی بەهێزکردنی مامۆستایان لە دروستکردنی برەندی تایبەتی خۆیان و پێشکەشکردنی کۆرسی فێرکاری بەرز. ئێمە هەوڵ دەدەین لە رێگەی خزمەتگوزارییە جۆراوجۆرەکانمانەوە، پشتگیری مامۆستایان و راهێنەران بکەین لە پێشکەشکردنی ئەزموونی فێرکاری تایبەت بە قوتابیان لە قۆناغە جیاوازەکاندا. بە بەڕێوەبردنی شاهین راشد، ئامانجمان ئەوەیە ببینە وێستگەی یەکەمی مامۆستایان لە کۆمەڵگای خۆماندا، بۆ پەرەپێدانی کەرەستەکانی فێرکردن و بنیاتنانی داهاتوویەکی گەش بۆ پەروەردە',
                     ],
                 ],
-            ],
+            ]
+        );
 
+        // Create or update about page
+        Page::updateOrCreate(
+            ['slug' => 'about'],
             [
-                'slug' => 'about',
                 'name' => 'about',
                 'data' => [
                     'description_ar' => [
@@ -101,9 +64,11 @@ class PageSeeder extends Seeder
                     ],
                 ],
             ]
-        ];
-        foreach ($pages as $page) {
-            Page::create($page);
-        }
+        );
     }
-}
+
+    public function down(): void
+    {
+        Page::whereIn('slug', ['footer', 'about'])->delete();
+    }
+};

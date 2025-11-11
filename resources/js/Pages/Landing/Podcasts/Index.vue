@@ -63,16 +63,15 @@
                             </span>
                         </div>
 
-                        <a
-                            :href="podcast.invitation_url"
-                            target="_blank"
+                        <Link
+                            :href="route('landing.podcasts.show', { podcast: podcast.id })"
                             class="block w-full"
                         >
                             <Button class="w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all">
                                 <Icon icon="mdi:video" class="w-5 h-5 me-2" />
                                 {{ $t("انضم الآن") }}
                             </Button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -19,15 +19,21 @@
                             class="leading-10 font-rabar-022 text-lg"
                             v-text="
                                 locale === 'ar'
-                                    ? props.page?.data?.description
+                                    ? props.page?.data?.description_ar
                                           ?.value ||
                                       $t(
                                           'يلا كورس هو أكثر من مجرد منصة تعليمية؛ إنه جسر يربط بين المعلمين الطموحين والطلاب الباحثين عن المعرفة. تم تصميمه ليكون الوجهة الأمثل للمعلمين الذين يرغبون في تطوير علاماتهم الشخصية وبناء محتوى تعليمي مبتكر يصل لكل طالب في أي مكان. من خلال يلا كورس، نفتح أبوابًا جديدة للتعلم، ونمكّن المعلمين من مشاركة رسالتهم التعليمية عبر أدوات تكنولوجية متقدمة تضمن لهم التميز والتأثير. هنا، يجتمع الشغف بالتعليم مع الاحترافية، ليصنعوا مستقبلًا مليئًا بالفرص والإبداع.'
                                       )
-                                    : props.page?.data?.description_ku
+                                    : locale === 'ku'
+                                    ? props.page?.data?.description_ku
                                           ?.value ||
                                       $t(
                                           'یەڵا کۆرس زیاترە لە پلاتفۆڕمێکی فێرکاری؛ ئەو پردێکە کە مامۆستایانی پڕ ئارەزوو و قوتابیانی بەدوای زانیندا دەگەڕێن پێکەوە دەبەستێتەوە. دیزاین کراوە بۆ ئەوەی ببێتە باشترین مەبەست بۆ ئەو مامۆستایانەی کە دەیانەوێت براندی کەسیی خۆیان پەرەپێبدەن و ناوەڕۆکی فێرکاری داهێنەرانە بنیات بنێن. لە ڕێگەی یەڵا کۆرسەوە، دەرگای نوێی فێربوون دەکەینەوە و مامۆستایان بەهێز دەکەین بۆ هاوبەشکردنی پەیامی فێرکارییان لە ڕێگەی ئامرازە تەکنۆلۆژییە پێشکەوتووەکانەوە کە جیاوازی و کاریگەرییان بۆ دەستەبەر دەکات. لێرەدا، شەیدایی فێرکردن لەگەڵ پیشەگەرییدا کۆدەبێتەوە، بۆ دروستکردنی داهاتوویەکی پڕ لە هەل و داهێنان.'
+                                      )
+                                    : props.page?.data?.description_en
+                                          ?.value ||
+                                      $t(
+                                          'Yalla Course is more than just an educational platform; it is a bridge connecting ambitious teachers with students seeking knowledge. It is designed to be the optimal destination for teachers who want to develop their personal brands and build innovative educational content that reaches every student anywhere. Through Yalla Course, we open new doors to learning and empower teachers to share their educational message through advanced technological tools that ensure excellence and impact. Here, passion for education meets professionalism to create a future full of opportunities and creativity.'
                                       )
                             "
                         ></p>
@@ -57,14 +63,20 @@
                                 class="leading-10 font-rabar-022 text-lg"
                                 v-text="
                                     locale === 'ar'
-                                        ? props.page?.data?.goal?.value ||
+                                        ? props.page?.data?.goal_ar?.value ||
                                           $t(
                                               'هدفنا في يلا كورس هو أن نكون الحافز الذي يحوّل أحلام المعلمين إلى واقع ملموس، وأن نساعدهم في نشر رسالتهم التعليمية للعالم. نؤمن بأن كل معلم يستحق منصة تتيح له أن يبدع ويصل إلى طلابه بأفضل الطرق الممكنة. نطمح إلى بناء مجتمع تعليمي يزدهر فيه الإبداع والتواصل، حيث يصبح كل معلم قائدًا وكل طالب مؤثرًا، معًا نصنع غدًا أكثر إشراقًا وأثرًا في عالم التعليم.'
                                           )
-                                        : props.page?.data?.goal_ku
+                                        : locale === 'ku'
+                                        ? props.page?.data?.goal_ku
                                               ?.value ||
                                           $t(
                                               'ئامانجی ئێمە لە یەڵا کۆرس ئەوەیە کە ببینە ئەو هاندەرەی کە خەونەکانی مامۆستایان دەکاتە ڕاستی بەرجەستە، و یارمەتیان بدەین لە بڵاوکردنەوەی پەیامی فێرکارییان بۆ جیهان. ئێمە بڕوامان وایە کە هەموو مامۆستایەک شایانی پلاتفۆرمێکە کە ڕێگەی پێ بدات داهێنان بکات و بە باشترین ڕێگای مومکین بگاتە قوتابیەکانی. ئێمە ئارەزوو دەکەین کۆمەڵگایەکی فێرکاری بنیات بنێین کە داهێنان و پەیوەندی تێیدا گەشە بکات، کە تێیدا هەموو مامۆستایەک دەبێتە ڕابەر و هەموو قوتابییەک کاریگەر، پێکەوە سبەینێیەکی ڕووناکتر و کاریگەرتر لە جیهانی پەروەردەدا دروست دەکەین.'
+                                          )
+                                        : props.page?.data?.goal_en
+                                              ?.value ||
+                                          $t(
+                                              'Our goal at Yalla Course is to be the catalyst that transforms teachers\' dreams into tangible reality and helps them spread their educational message to the world. We believe that every teacher deserves a platform that allows them to be creative and reach their students in the best possible ways. We aspire to build an educational community where creativity and communication flourish, where every teacher becomes a leader and every student becomes influential. Together, we create a brighter and more impactful tomorrow in the world of education.'
                                           )
                                 "
                             ></p>

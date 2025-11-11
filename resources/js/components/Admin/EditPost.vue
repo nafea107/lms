@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="grid grid-cols-4 items-center gap-4 hidden">
+                    <div class="grid grid-cols-4 items-center gap-4">
                         <InputLabel class="text-right">
                             {{ $t("العنوان الانجليزي") }}
                         </InputLabel>
@@ -42,10 +42,9 @@
                         <InputLabel class="text-right mt-2">
                             {{ $t("المحتوى العربي") }}
                         </InputLabel>
-                        <textarea
-                            v-model="form.content.ar"
-                            class="col-span-3 min-h-[100px] p-2 border rounded-md"
-                        ></textarea>
+                        <div class="col-span-3">
+                            <RichTextEditor v-model="form.content.ar" />
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -53,21 +52,19 @@
                         <InputLabel class="text-right mt-2">
                             {{ $t("المحتوى الكردي") }}
                         </InputLabel>
-                        <textarea
-                            v-model="form.content.ku"
-                            class="col-span-3 min-h-[100px] p-2 border rounded-md"
-                        ></textarea>
+                        <div class="col-span-3">
+                            <RichTextEditor v-model="form.content.ku" />
+                        </div>
                     </div>
                 </div>
                 <div>
-                    <div class="grid grid-cols-4 items-start gap-4 hidden">
+                    <div class="grid grid-cols-4 items-start gap-4">
                         <InputLabel class="text-right mt-2">
                             {{ $t("المحتوى الانجليزي") }}
                         </InputLabel>
-                        <textarea
-                            v-model="form.content.en"
-                            class="col-span-3 min-h-[100px] p-2 border rounded-md"
-                        ></textarea>
+                        <div class="col-span-3">
+                            <RichTextEditor v-model="form.content.en" />
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -144,6 +141,7 @@ import { Icon } from "@iconify/vue";
 import { reactive } from "vue";
 import Swal from "sweetalert2";
 import { useI18n } from "vue-i18n";
+import RichTextEditor from "@/components/RichTextEditor.vue";
 
 const props = defineProps({
     post: {

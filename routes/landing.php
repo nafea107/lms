@@ -35,6 +35,10 @@ Route::name('landing.')->group(function () {
 
     // Podcasts routes
     Route::get('/podcasts', [App\Http\Controllers\Landing\PodcastController::class, 'index'])->name('podcasts.index');
+    Route::get('/podcasts/{podcast}', [App\Http\Controllers\Landing\PodcastController::class, 'show'])->name('podcasts.show');
+
+    // Posts routes
+    Route::get('/posts/{post}', [App\Http\Controllers\Landing\PostController::class, 'show'])->name('posts.show');
 
     // Library routes
     Route::get('/library', [App\Http\Controllers\Landing\LibraryController::class, 'index'])->name('library.index');

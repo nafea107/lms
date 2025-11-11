@@ -11,31 +11,31 @@
             >
                 <!-- Center: Sun Icon -->
                 <div class="absolute left-1/2 transform -translate-x-1/2">
-                    <img alt="" class="w-10 h-10" src="/assets/img/sun.png" />
+                    <img alt="" class="w-16 h-16" src="/assets/img/sun.png" />
                 </div>
             </div>
 
             <!-- Green Stripe (Bottom) with Content -->
             <div class="bg-green-600 h-8">
                 <div
-                    class="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-2.5 flex justify-between items-center absolute bottom-0 top-0"
+                    class="max-w-7xl mx-auto px-2 sm:px-4 py-1 flex flex-col justify-between items-center absolute bottom-0 top-0"
                 >
                     <!-- Left: Logo and Text -->
-                    <div
-                        class="flex flex-col justify-center items-center gap-1 sm:gap-2 bg-white h-28 px-3"
+                    <Link
+                        :href="route('landing.home')"
+                        class="flex flex-col justify-center items-center gap-1 sm:gap-2 h-28 px-3"
                     >
-                        <Link :href="route('landing.home')">
-                            <img
-                                :src="`/assets/img/logo.png`"
-                                alt="Logo"
-                                class="h-6 sm:h-10"
-                            />
-                        </Link>
-                        <span
-                            class="text-green-600 text-sm sm:text-lg font-bold"
-                            >{{ appName }}</span
-                        >
-                    </div>
+                        <img
+                            :src="`/assets/img/logo.png`"
+                            alt="Logo"
+                            class="h-8 sm:h-14"
+                        />
+                    </Link>
+                    <Link :href="route('landing.home')">
+                        <p class="text-white text-sm sm:text-lg font-bold">
+                            {{ appName }}
+                        </p>
+                    </Link>
                 </div>
                 <div
                     class="max-w-7xl mx-auto items-center justify-center h-full px-4"
@@ -101,7 +101,13 @@
                                     class="cursor-pointer"
                                 >
                                     <Icon
+                                        v-if="lang.icon"
                                         :icon="lang.icon"
+                                        class="w-4 h-4 me-2"
+                                    />
+                                    <img
+                                        v-else
+                                        :src="lang.img"
                                         class="w-4 h-4 me-2"
                                     />
                                     {{ lang.name }}
@@ -512,7 +518,12 @@ const openMainCategory = ref(null);
 const languages = [
     { code: "ar", name: "العربية", icon: "twemoji:flag-iraq" },
     { code: "en", name: "English", icon: "twemoji:flag-united-states" },
-    { code: "ku", name: "کوردی", icon: "emojione:flag-for-kurdistan" },
+    {
+        code: "ku",
+        name: "کوردی",
+        icon: "",
+        img: "/assets/img/icons/ku-flag.jpeg",
+    },
 ];
 
 onClickOutside(suggestionsBox, () => (suggestions.value = []));

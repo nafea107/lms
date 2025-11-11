@@ -27,14 +27,21 @@
                 </div>
 
                 <!-- Post Content -->
-                <div class="flex-1 p-6">
+                <div class="flex-1 p-6 flex flex-col">
                     <h3 class="text-xl md:text-2xl font-rabar-021 text-gray-800 mb-4">
                         {{ post.title[locale] }}
                     </h3>
                     <div
-                        class="text-gray-700 font-rabar-004 leading-relaxed line-clamp-6"
-                        v-html="formatContent(post.content[locale])"
+                        class="text-gray-700 font-rabar-004 leading-relaxed line-clamp-3 mb-4 flex-grow"
+                        v-html="getExcerpt(post.content[locale])"
                     ></div>
+                    <Link
+                        :href="route('landing.posts.show', { post: post.id })"
+                        class="inline-flex items-center text-gray-800 hover:text-gray-900 font-rabar-021 font-semibold transition-colors duration-300"
+                    >
+                        {{ $t("اقرأ المزيد") }}
+                        <Icon icon="mdi:arrow-left" class="w-5 h-5 ml-2" />
+                    </Link>
                 </div>
             </div>
         </div>
@@ -64,7 +71,8 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { usePage } from "@inertiajs/vue3";
+import { usePage, Link } from "@inertiajs/vue3";
+import { Icon } from "@iconify/vue";
 
 const props = defineProps({
     posts: {
@@ -89,17 +97,26 @@ function toggleShowAll() {
     showAll.value = !showAll.value;
 }
 
-function formatContent(content) {
+function getExcerpt(content) {
     if (!content) return "";
-    // Convert line breaks to <br> tags
-    return content.replace(/\n/g, "<br>");
+    
+    // Strip HTML tags for excerpt
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = content;
+    const textContent = tempDiv.textContent || tempDiv.innerText || "";
+    
+    // Limit to 150 characters
+    if (textContent.length > 150) {
+        return textContent.substring(0, 150) + "...";
+    }
+    return textContent;
 }
 </script>
 
 <style scoped>
-.line-clamp-6 {
+.line-clamp-3 {
     display: -webkit-box;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

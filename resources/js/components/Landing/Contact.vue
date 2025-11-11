@@ -21,21 +21,21 @@
                 </div> -->
                 <div class="flex-1 flex justify-center flex-col w-full">
                     <h2
-                        class="text-2xl mb-3 underline-offset-4 text-center font-rabar-021 text-white bg-emerald-950 py-2"
+                        class="text-2xl mb-3 underline-offset-4 text-center font-rabar-021 text-white bg-[#3f3e44] py-2"
                     >
-                        {{ $t("تواصل مع المعلم") }}
+                        {{ $t("الانتقادات والاقتراحات") }}
                     </h2>
                     <div>
                         <textarea
                             v-model="message"
                             :placeholder="$t('الرسالة')"
-                            class="bg-emerald-950 w-full p-3 text-white caret-white"
+                            class="bg-[#3f3e44] w-full p-3 text-white caret-white"
                             rows="8"
                         >
                         </textarea>
                     </div>
                     <Button
-                        class="bg-transparent w-full mt-4"
+                        class="bg-transparent w-full mt-4 hover:bg-[#3f3e44]"
                         variant="outline"
                         @click="onSubmit"
                     >
